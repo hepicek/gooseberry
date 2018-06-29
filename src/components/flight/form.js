@@ -56,7 +56,7 @@ class FORM extends Component {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className="check">
                     <input onChange={this.props.handleCheckboxChange} type="checkbox" name="checkbox"/> Only Direct Flights
                 </div>
                 <div 

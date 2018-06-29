@@ -5,8 +5,9 @@ p {
     display: flex;
     border: 1px solid gray;
     margin: 10px auto;
-    width: 600px;
+    width: 700px;
     border-radius: 10px;
+    background-color: rgba(0, 173, 153, .15);
 }
 .detailsContainer {
     flex-grow: 1;

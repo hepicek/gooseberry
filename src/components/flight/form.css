@@ -9,6 +9,7 @@
     align-items: center;
     background-color: #019887;
     border-radius: 10px;
+    color: white;
 }
 .mainForm-from, .mainForm-to {
     padding: 1px;
@@ -41,4 +42,11 @@ input {
     padding: 10px 20px;
     margin: 5px;
     border-radius: 10px;
+}
+input[type="checkbox"] {
+    color: white;
+}
+.check {
+    display: flex;
+    align-items: center;
 }

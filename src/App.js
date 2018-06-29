@@ -3,12 +3,13 @@ import axios from "axios/index";
 import List from './components/List';
 import FORM from './components/flight/form';
 import './App.css';
+// import piwi from '../public/piwi.jpg';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      direct: 1,
+      direct: 0,
       fromInput: "OKC",
       toInput: "DFW",
       depDate: "2018-07-08",
@@ -23,13 +24,15 @@ class App extends Component {
   }
   formatFlightData(flight) {
     let to_dTime = new Date(flight.dTime * 1000);
+    console.log(to_dTime.toISOString());
+    console.log(to_dTime.getMonth() + 1);
     let to_dTime_minutes = to_dTime.getMinutes() < 10 ? '0' + to_dTime.getMinutes() : to_dTime.getMinutes();
     let to_dTime_time = to_dTime.getHours() + ":" + to_dTime_minutes;
-    let to_dTime_date = `${to_dTime.getDate()}.${to_dTime.getMonth()}.${to_dTime.getFullYear()}`;
+    let to_dTime_date = `${to_dTime.getDate()}.${to_dTime.getMonth() + 1}.${to_dTime.getFullYear()}`;
     let to_aTime = new Date(flight.aTime * 1000);
     let to_aTime_minutes = to_aTime.getMinutes() < 10 ? '0' + to_aTime.getMinutes() : to_aTime.getMinutes();
     let to_aTime_time = to_aTime.getHours() + ":" + to_aTime_minutes;
-    let to_aTime_date = `${to_aTime.getDate()}.${to_aTime.getMonth()}.${to_aTime.getFullYear()}`;
+    let to_aTime_date = `${to_aTime.getDate()}.${to_aTime.getMonth() + 1}.${to_aTime.getFullYear()}`;
     let ret_dTime;
     let ret_aTime = new Date(flight.route[flight.route.length -1].aTime * 1000);
     for(let i = 0; i < flight.route.length; i++) {
@@ -40,11 +43,11 @@ class App extends Component {
     }
     let ret_dTime_minutes = ret_dTime.getMinutes() < 10 ? '0' + ret_dTime.getMinutes() : ret_dTime.getMinutes();
     let ret_dTime_time = ret_dTime.getHours() + ":" + ret_dTime_minutes;
-    let ret_dTime_date = `${ret_dTime.getDate()}.${ret_dTime.getMonth()}.${ret_dTime.getFullYear()}`;
+    let ret_dTime_date = `${ret_dTime.getDate()}.${ret_dTime.getMonth() + 1}.${ret_dTime.getFullYear()}`;
     let ret_aTime_minutes = ret_aTime.getMinutes() < 10 ? '0' + ret_aTime.getMinutes() : ret_aTime.getMinutes();
     let ret_aTime_time = ret_aTime.getHours() + ":" + ret_aTime_minutes;
-    let ret_aTime_date = `${ret_aTime.getDate()}.${ret_aTime.getMonth()}.${ret_aTime.getFullYear()}`;
-
+    let ret_aTime_date = `${ret_aTime.getDate()}.${ret_aTime.getMonth() + 1}.${ret_aTime.getFullYear()}`;
+    console.log(ret_dTime.getMonth() + 1);
     let flight_Obj = {
       departure: {},
       return: {},
@@ -75,7 +78,10 @@ class App extends Component {
     })
   }
   handleMotherFuckinSearch() {
-    console.log("clicked")
+    this.setState({
+      flights: [],
+      formattedFlights: [],
+    })
     let {fromInput, toInput, depDate, retDate} = this.state;
     if(!fromInput || !toInput || !depDate || !retDate) {
       return 
@@ -120,20 +126,23 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">I'm actually just a Chinese GooseBerry</h1>
+          <div className="logo"></div>
+          <h1 className="App-title">Piwi</h1>
         </header>
-          <FORM 
-            handleMotherFuckinSearch={this.handleMotherFuckinSearch}
-            handleInputChange={this.handleInputChange}
-            handleCheckboxChange={this.handleCheckboxChange}
-            fromInput={this.state.fromInput}
-            toInput={this.state.toInput}
-            depDate={this.state.depDate}
-            retDate={this.state.retDate}
-          />
-          <List 
-            flights={this.state.formattedFlights}
-          />
+          <div className="container">
+            <FORM 
+              handleMotherFuckinSearch={this.handleMotherFuckinSearch}
+              handleInputChange={this.handleInputChange}
+              handleCheckboxChange={this.handleCheckboxChange}
+              fromInput={this.state.fromInput}
+              toInput={this.state.toInput}
+              depDate={this.state.depDate}
+              retDate={this.state.retDate}
+            />
+            <List 
+              flights={this.state.formattedFlights}
+            />
+          </div>
       </div>
     );
   }
