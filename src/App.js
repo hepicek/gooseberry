@@ -19,6 +19,7 @@ class App extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleMotherFuckinSearch = this.handleMotherFuckinSearch.bind(this);
     this.formatFlightData = this.formatFlightData.bind(this);
+      this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
   }
   formatFlightData(flight) {
     let to_dTime = new Date(flight.dTime * 1000);
@@ -108,6 +109,13 @@ class App extends Component {
         [input]: value
     }))
   }
+    handleCheckboxChange(e) {
+        let value = e.target.checked ? 1 : 0;
+        this.setState(
+            {           direct: value
+            }
+        )
+    }
   render() {
     return (
       <div className="App">
@@ -117,6 +125,7 @@ class App extends Component {
           <FORM 
             handleMotherFuckinSearch={this.handleMotherFuckinSearch}
             handleInputChange={this.handleInputChange}
+            handleCheckboxChange={this.handleCheckboxChange}
             fromInput={this.state.fromInput}
             toInput={this.state.toInput}
             depDate={this.state.depDate}
