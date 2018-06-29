@@ -8,10 +8,11 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fromInput: "",
-      toInput: "",
-      depDate: undefined,
-      retDate: undefined,
+      direct: 1,
+      fromInput: "OKC",
+      toInput: "DFW",
+      depDate: "2018-07-08",
+      retDate: "2018-07-18",
       flights: [],
       formattedFlights: [],
   }
@@ -31,7 +32,7 @@ class App extends Component {
     let ret_dTime;
     let ret_aTime = new Date(flight.route[flight.route.length -1].aTime * 1000);
     for(let i = 0; i < flight.route.length; i++) {
-      if(flight.route[i].return = 1) {
+      if(flight.route[i].return === 1) {
         ret_dTime = new Date(flight.route[i].dTime * 1000);
         break;
       } 
@@ -65,7 +66,7 @@ class App extends Component {
       style: 'currency',
       currency: 'CZK'
     }).format(flight.conversion.EUR * 25);
-    console.log(flight_Obj);
+    // console.log(flight_Obj);
     this.setState((prevState) => {
       return {
         formattedFlights: [...prevState.formattedFlights, flight_Obj]
@@ -83,11 +84,11 @@ class App extends Component {
       retDate = retDate.split("-");
       retDate = retDate[2] + "/" + retDate[1] + "/" + retDate[0];
 
-      let url = `https://api.skypicker.com/flights?flyFrom=${fromInput.toUpperCase()}&to=${toInput.toUpperCase()}&dateFrom=${depDate}&dateTo=${depDate}&returnFrom=${retDate}&returnTo=${retDate}&limit=5`;
+      let url = `https://api.skypicker.com/flights?flyFrom=${fromInput.toUpperCase()}&to=${toInput.toUpperCase()}&dateFrom=${depDate}&dateTo=${depDate}&returnFrom=${retDate}&returnTo=${retDate}&limit=10&directFlights=${this.state.direct}`;
 
       axios.get(url)
       .then((res) => {
-          // console.log(res.data.data); 
+          console.log(res.data.data); 
           this.setState({flights: res.data.data});
       })
       .then(() => {
@@ -116,6 +117,10 @@ class App extends Component {
           <FORM 
             handleMotherFuckinSearch={this.handleMotherFuckinSearch}
             handleInputChange={this.handleInputChange}
+            fromInput={this.state.fromInput}
+            toInput={this.state.toInput}
+            depDate={this.state.depDate}
+            retDate={this.state.retDate}
           />
           <List 
             flights={this.state.formattedFlights}

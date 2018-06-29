@@ -1,34 +1,43 @@
-.mainForm {
 
-    width: 70%;
+.mainForm {
+    width: 700px;
     margin: 20px auto;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #019887;
+    border-radius: 10px;
 }
 .mainForm-from, .mainForm-to {
-    width: 45%;
-    padding: 10px;
+    padding: 1px;
+    /* border: 1px solid red; */
+}
+.inputFields {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
 }
 .input {
-    /* height: 50px; */
-    width: 100%;
-    border: 1px solid gray;
     margin: 5px auto;
     display: flex;
     flex-direction: column;
     text-align: left;
     padding: 5px 10px;
+    color: white;
 }
 input {
     height: 30px;
     padding: 2px 5px;
     font-size: 1.2rem;
+    border-radius: 5px;
+    border: none;
 }
 .mainForm-button {
     cursor: pointer;
-    background-color: #019887;
-    color: white;
+    background-color: white;
+    color: #019887;
     padding: 10px 20px;
     margin: 5px;
     border-radius: 10px;

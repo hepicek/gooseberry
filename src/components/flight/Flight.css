@@ -4,8 +4,9 @@ p {
 .flightInfo {
     display: flex;
     border: 1px solid gray;
-    padding: 10px;
-    width: 50%;
+    margin: 10px auto;
+    width: 600px;
+    border-radius: 10px;
 }
 .detailsContainer {
     flex-grow: 1;
@@ -14,9 +15,13 @@ p {
     display: flex;
     align-items: center;
     padding: 5px;
+    border-right: 1px solid gray;
 }
 .departure, .arrival {
     display: flex;
     justify-content: space-around;
-    border: 1px solid red;  
+    align-items: center;
+}
+.departure {
+    border-bottom: 1px solid gray;
 }
