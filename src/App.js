@@ -118,7 +118,7 @@ class App extends Component {
             handleInputChange={this.handleInputChange}
           />
           <List 
-            flights={this.state.flights}
+            flights={this.state.formattedFlights}
           />
       </div>
     );
