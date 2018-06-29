@@ -16,21 +16,29 @@ class Flight extends Component {
         const utcOffset = aTime.getTimezoneOffset();
         aTime.setMinutes(aTime.getMinutes() + utcOffset);
         dTime.setMinutes(dTime.getMinutes() + utcOffset);
-
+        const dTime_time = dTime.getHours() + ":" + dTime.getMinutes();
+        const dTime_date = `${dTime.getDate()}.${dTime.getMonth()}.${dTime.getFullYear()}`
+        const aTime_time = aTime.getHours() + ":" + aTime.getMinutes();
+        const aTime_date = `${aTime.getDate()}.${aTime.getMonth()}.${aTime.getFullYear()}`
+        const airlines = flight.airlines.map(airline => {
+            return <p key={airline}>{airline}</p>;
+        })
         return (
             <div className="flightInfo">
                 <div className="price">
                     <p>{price}</p>
                 </div>
-                <div>
+                <div className="detailsContainer">
                     <div className="departure">
-                        <p>{flight.airline}</p>
-                        <p>Departure time: {dTime.toUTCString()}</p>
+                        <div className="airline">{airlines}</div>
+                        <p>Departure time: {dTime_time}</p>
+                        <p>{dTime_date}</p>
                         <p>{flight.fly_duration}</p>
                     </div>
                     <div className="arrival">
-                        <p>{flight.airline}</p>
-                        <p>Arrival time: {aTime.toUTCString()}</p>
+                        <div  className="airline">{airlines}</div>
+                        <p>Arrival time: {aTime_time}</p>
+                        <p>{aTime_date}</p>
                         <p>{flight.fly_duration}</p>
                     </div>
                 </div>
