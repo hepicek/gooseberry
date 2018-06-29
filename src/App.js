@@ -66,6 +66,11 @@ class App extends Component {
       currency: 'CZK'
     }).format(flight.conversion.EUR * 25);
     console.log(flight_Obj);
+    this.setState((prevState) => {
+      return {
+        formattedFlights: [...prevState.formattedFlights, flight_Obj]
+      }
+    })
   }
   handleMotherFuckinSearch() {
     console.log("clicked")
